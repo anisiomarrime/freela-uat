@@ -1,0 +1,69 @@
+{% extends "_layouts/base.html" %}
+
+{% block title %}
+    Freela - Login
+{% endblock %}
+
+{% block content %}
+
+    <!-- ============================ Who We Are Start ================================== -->
+    <section>
+				<div class="container">
+
+					<div class="row justify-content-center">
+
+						<div class="col-lg-6 col-md-12 col-sm-12 col-xs-12 login-container">
+							<div class="modal-body card" style="padding: 20px">
+								<a href="/" class="navbar-brand" style="text-align: center; min-width: 100%">
+									<img src="/static/website/img/logo.png" class="sticky-logo" alt="Workio">
+								</a>
+								<!--div class="social-login center-tr">
+									<ul>
+										<li><a href="#" class="btn connect-fb"><i class="ti-facebook"></i>Continuar com Facebook</a></li>
+										<li><a href="#" class="btn connect-linked"><i class="ti-linkedin"></i>Continuar com Linkedin</a></li>
+									</ul>
+								</div-->
+								<div class="login-form" ng-app="workApp" ng-controller="loginCtrl">
+									<h4 class="modal-header-title" style="font-weight: 300">Bem vindo <span>De Volta</span></h4>
+									<form ng-submit="login()" novalidate>
+										<div class="form-group">
+											<label>E-mail</label>
+											<div class="input-with-icon">
+												<input type="text" class="form-control" placeholder="meunome@exemplo.com" ng-model="email">
+												<i class="ti-user"></i>
+											</div>
+										</div>
+
+										<div class="form-group">
+											<label>Password</label>
+											<div class="input-with-icon">
+												<input type="password" class="form-control" placeholder="*******" ng-model="password">
+												<i class="ti-unlock"></i>
+											</div>
+										</div>
+
+										<div class="form-group">
+											<button type="submit" class="btn btn-primary btn-md full-width pop-login">Entrar</button>
+										</div>
+									</form>
+								</div>
+							</div>
+							<div class="modal-footer" style="background: none; border: none">
+								<div class="mf-link"><i class="ti-user"></i>Não tem uma conta ?<a href="/register"> Registar</a></div>
+								<div class="mf-forget"><a href="#" data-toggle="modal" data-target="#reset"><i class="ti-help"></i>Esqueceu a Senha</a></div>
+							</div>
+						</div >
+
+					</div>
+
+				</div>
+	</section>
+	<div class="clearfix"></div>
+	<!-- ============================ Who We Are End ================================== -->
+{% endblock %}
+{% block js %}
+	<script>
+		$('footer').hide();
+		$('body').addClass('bg-light');
+    </script>
+{% endblock %}

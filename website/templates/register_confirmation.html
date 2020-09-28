@@ -1,0 +1,64 @@
+{% extends "_layouts/base.html" %}
+
+{% block title %}
+Freela
+{% endblock %}
+
+{% block content %}
+<!-- ============================================================== -->
+<!-- Top header  -->
+<!-- ============================================================== -->
+<div class="topbar" id="top">
+    <div class="header exchange-logo">
+        <div class="container po-relative">
+            <nav class="navbar navbar-expand-lg header-nav-bar">
+                <a href="/" class="navbar-brand">
+                    <img width="150px" src="/static/website/img/logo-light.png"
+                         class="default-logo" alt="Freela">
+                    <img width="150px" src="/static/website/img/logo.png" class="sticky-logo"
+                         alt="Freela">
+                </a>
+            </nav>
+        </div>
+    </div>
+</div>
+<div class="clearfix"></div>
+<!-- ============================================================== -->
+
+<!-- Top header  -->
+<!-- ============================================================== -->
+<!-- ============================ Who We Are Start ================================== -->
+<section style="min-height: 89vh">
+    <div class="container">
+        <div class="row justify-content-center">
+            {% if not apply %}
+            <div class="col-lg-10 col-md-10 col-sm-12" style="margin-top: 10%">
+                <div class="modal-body card" style="padding: 20px">
+                    <div class="col-md-12">
+                        <h2 class="modal-header-title">Olá {{ user.first_name }} {{ user.last_name }},</h2>
+                        <p class="text-justify">Seja bem vindo(a) ao <b>Freela</b>, aqui vamos ajudar a criar o seu perfil como {% if is_freelancer %} Freelancer{% else %} Agente{% endif %}, {% if is_freelancer %} para que voce consiga o seu primeiro projecto.{% else %} para que voce crie o seu primeiro projecto.{% endif %}
+                            Siga estas etapas para aproveitar ao máximo os benefícios do <b>Freela</b>!</p>
+                    </div>
+                    <br/>
+                    <a href="/account/verify/">1 - Verificar Identidade</a><br/>
+                    <a href="/about/privacy-policy/">2 - Política de Privacidade</a>
+                    <div class="col-md-2">
+                        <a href="{% if is_freelancer %}/freelancer-dashboard/{% else %}/employer-dashboard/{% endif %}" class="btn btn-primary">Vamos lá</a>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</section>
+<div class="clearfix"></div>
+<!-- ============================ Who We Are End ================================== -->
+{% endblock %}
+{% block js %}
+<script>
+        $('.default-logo').attr('src', '/static/website/img/logo.png');
+        $('.exchange-logo').addClass('light');
+        $('body').addClass('bg-light');
+        $('footer').hide();
+</script>
+{% endblock %}

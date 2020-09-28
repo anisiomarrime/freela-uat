@@ -1,0 +1,156 @@
+{% extends "_layouts/base.html" %}
+{% block title %}
+Freela - Pacotes
+{% endblock %}
+{% block content %}
+{% include "_layouts/navbar.html" %}
+<!-- ============================ Hero Banner  Start================================== -->
+<div class="container-fluid breadcrumbs" style="margin-top: -0%">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <a href="/">
+                    Freela
+                </a>
+                <a href="javascript:void(0)">
+						<span>
+							<i class="ti-arrow-right"></i>
+						</span>
+                    Planos
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="clearfix"></div>
+<!-- ============================ Hero Banner End ================================== -->
+
+<section class="tr-single-detail gray-bg" style="background: rgba(200, 200, 200, .1)">
+	<h3 class="text-center" style="font-size: 40px; line-height: 50px;margin-top: -30px;padding: 20px">Consiga mais projetos ao aderir a um plano de benefícios para freelancers </h3>
+    <div class="container">
+        <!--div class="row">
+            <div class="col text-center">
+                <div class="sec-heading mx-auto">
+                    <p>Our Packages</p>
+                    <h2>Our Best Pricing Plan</h2>
+                </div>
+            </div>
+        </div-->
+        <div class="row align-items-center m-0">
+            {% for plan in plans %}
+            <div class="col-lg-4 col-md-12 card-plan">
+                <div class="pr-table-box">
+                    <div class="pr-pricing-price-container">
+                        <span class="pr-currency">MZN</span>
+                        <span class="pr-price-value">{{ plan.price }}</span>
+                    </div>
+                    <h4 class="pr-price-time text-warning">Pacote Mensal</h4>
+                    <div class="pr-pricing-container">{{ plan.name }}</div>
+                    <div class="pr-pricing-list-container">
+                        <ul class="pr-pricing-list">
+                            {% for feature in plan.all_features %}
+                            <li>{{ feature.name }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    <div class="pr-button-wrap">
+                        {% if current_package == plan.id %}
+                        <a class="btn price-btn btn-success disabled" disabled href="#" title="Este é o seu Pacote actual.">
+                            Pacote Actual
+                        </a>
+                        {% else %}
+                        <a class="btn price-btn btn-success" href="/plans/checkout/{{ plan.id }}/" title="Este Pacote por enquanto não está disponível.">
+                            Quero este Pacote
+                        </a>
+                        {% endif %}
+                        <!--b>href="/plans/checkout/{{ plan.id }}/"></b-->
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <article class="plans">
+
+                    <table>
+                        <thead>
+                        <tr>
+                            <th class="hide"></th>
+                            {% for plan in plans %}
+                            <th>{{ plan.name }}</th>
+                            {% endfor %}
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>Preço Mensal</td>
+                            {% for plan in plans %}
+                            <td><span class="txt-top">MZN</span><span class="txt-l">{{ plan.price }}</span></td>
+                            {% endfor %}
+                        </tr>
+                        <tr>
+                            <td colspan="4" class="sep">Começe Facilmente</td>
+                        </tr>
+                        <tr>
+                            <td>Categorias no Perfil</td>
+                            {% for plan in plans %}
+                            <td>{{ plan.max_category }}</td>
+                            {% endfor %}
+                        </tr>
+                        <tr>
+                            <td>Seguir Actividade de Clientes</td>
+                            {% for plan in plans %}
+                            <td>{{ plan.max_follow }}</td>
+                            {% endfor %}
+                        </tr>
+                        <tr>
+                            <td>Habilidades Adicionais em Seu Perfil (skill)</td>
+                            {% for plan in plans %}
+                            <td>{{ plan.max_skill }}</td>
+                            {% endfor %}
+                        </tr>
+                        <tr>
+                            <td>Projectos em Execução</td>
+                            {% for plan in plans %}
+                            <td>{% if plan.max_project > 900 %} Ilimitados {% else %} {{ plan.max_project }} {% endif %}</td>
+                            {% endfor %}
+                        </tr>
+                        <tr>
+                            <td colspan="4" class="sep">Mantenha-se em Alta</td>
+                        </tr>
+                        <tr>
+                            <td>Chat com Clientes em Tempo Real</td>
+                            {% for plan in plans %}
+                            <td>{% if plan.is_customer_chat %} <span class="tick">&#10004;</span> {% endif %}</td>
+                            {% endfor %}
+                        </tr>
+                        <tr>
+                            <td>Selo de Freela Premium</td>
+                            {% for plan in plans %}
+                            <td>{% if plan.is_premium %} <span class="tick">&#10004;</span> {% endif %}</td>
+                            {% endfor %}
+                        </tr>
+                        <tr>
+                            <td>Notificação de Projecto</td>
+                            {% for plan in plans %}
+                            <td>{% if plan.is_notification %} <span class="tick">&#10004;</span> {% endif %}</td>
+                            {% endfor %}
+                        </tr>
+                        </tbody>
+                    </table>
+                </article>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+{% block js %}
+<script>
+        $('.topbar').addClass('tp-rlt');
+        $('.default-logo').attr('src', '/static/website/img/logo.png');
+        $('.exchange-logo').addClass('light');
+
+</script>
+{% endblock %}

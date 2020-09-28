@@ -1,0 +1,27 @@
+{% extends "_layouts/base.html" %}
+
+{% block title %}
+    Freela - Checkout Completed
+{% endblock %}
+
+{% block content %}
+{% include "_layouts/navbar.html" %}
+    <!-- ============================ Who We Are Start ================================== -->
+    <section style="min-height: 75vh">
+		<div class="container">
+			<i class="ti-check text-center" style="display: block;margin: auto;font-size: 60px"></i>
+			<h2 style="font-size: 32px; opacity: .9">Parabéns {{ name }} você activou com sucesso o pacote <b class="text-blue">{{ package }}.</b></h2><br/>
+			<h4 class="text-center"><a href="/freelancer-dashboard">Iniciar Agora...</a></h4>
+		</div>
+	</section>
+	<div class="clearfix"></div>
+	<!-- ============================ Who We Are End ================================== -->
+
+{% endblock %}
+{% block js %}
+<script>
+        $('.topbar').addClass('tp-rlt');
+        $('.default-logo').attr('src', '/static/website/img/logo.png');
+        $('.exchange-logo').addClass('light');
+</script>
+{% endblock %}

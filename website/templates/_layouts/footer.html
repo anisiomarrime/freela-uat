@@ -1,0 +1,289 @@
+            <footer class="dark-footer skin-dark-footer" style="font-size: 12px">
+				<div class="footer-bottom">
+					<div class="container">
+						<div class="row align-items-center">
+
+							<div class="col-lg-6 col-md-6">
+								<p class="mb-0">© 2020 <a href="https://www.olygran.co.mz" target="_blank">Olygran.</a> Todos os direitos reservados, <a href="/about/privacy-policy" style="text-decoration: underline">Políticas de Privacidade</a></p>
+							</div>
+
+							<div class="col-lg-6 col-md-6 text-right">
+								<ul class="footer-bottom-social">
+									<li><a href="#"><i class="ti-facebook" style="font-size: 12px"></i></a></li>
+									<li><a href="#"><i class="ti-twitter" style="font-size: 12px"></i></a></li>
+									<li><a href="https://instagram.com/freela.co.mz" target="_blank"><i class="ti-instagram" style="font-size: 12px"></i></a></li>
+									<li><a href="#"><i class="ti-linkedin" style="font-size: 12px"></i></a></li>
+								</ul>
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</footer>
+
+			<!-- ============================ Footer End ================================== -->
+			<div ng-app="workApp" ng-controller="loginCtrl">
+				<!-- Reset In Modal -->
+				<div class="modal fade" id="reset" tabindex="-1" role="dialog" aria-labelledby="registermodal" aria-hidden="true">
+					<div class="modal-dialog modal-dialog-centered login-pop-form" role="document">
+						<div class="modal-content" id="resetPassword">
+							<div class="modal-header">
+								<h4 style="color: #ddd; font-size: 19px;min-width: 100%" class="modal-title">Reset da Senha</h4>
+								<div class="logo-thumb">
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+										<span aria-hidden="true"><i class="ti-close"></i></span>
+									</button>
+								</div>
+							</div>
+							<div class="modal-body">
+								<h4 class="modal-header-title"></h4>
+								<div class="login-form">
+									<form onsubmit="reset_password();return false;">
+										<div class="form-group">
+											<label>E-mail</label>
+											<div class="input-with-icon">
+												<input type="email" class="form-control" placeholder="meunome@exemplo.com" id="email" required>
+												<i class="ti-user"></i>
+											</div>
+										</div>
+
+										<div class="form-group">
+											<button type="submit" class="btn btn-primary btn-md full-width pop-login">Solicitar Senha</button>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- End Modal -->
+				<!-- Proposal Modal -->
+				<div class="modal fade" id="proposal" tabindex="-1" role="dialog" aria-labelledby="proposal" aria-hidden="true">
+						<div class="modal-dialog modal-dialog-centered login-pop-form" role="document">
+							<div class="modal-content" id="proposal-up">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
+								</div>
+								<div class="modal-body">
+									<div class="login-form">
+										<h2 class="modal-title" id="modal-title">Enviar Proposta</h2><br/>
+										<form ng-submit="proposal()">
+											{% csrf_token %}
+											<div class="form-group">
+												<label>Valor da Proposta</label>
+												<input type="text" class="form-control" ng-model="budget" placeholder="Ex: 2000.00">
+												<input type="hidden" id="project_id">
+											</div>
+
+											<div class="form-group">
+												<label>Prazo de Entrega (dias)</label>
+												<input type="number" class="form-control" placeholder="Ex: 10" min="1" max="365" ng-model="deadline">
+											</div>
+
+											<div class="form-group">
+												<label>Descrição</label>
+												<textarea rows="1" placeholder="Escreva algum comentario para convenser o Cliente" style="height: 100px" class="form-control" ng-model="description"></textarea>
+											</div>
+
+											<div class="form-group">
+												<button type="submit" class="btn btn-primary btn-md pull-right pop-login">Enviar Proposta</button>
+											</div>
+										</form>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				<!-- End Modal -->
+				<!-- Hire Modal -->
+				<div class="modal fade" id="hire" tabindex="-1" role="dialog" aria-labelledby="hire" aria-hidden="true">
+							<div class="modal-dialog modal-dialog-centered login-pop-form" role="document">
+								<div class="modal-content" id="hire-up">
+									<div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+										  <span aria-hidden="true">&times;</span>
+										</button>
+									</div>
+									<h2>Ofereça projecto a <span id="freelancer_name"></span></h2>
+									<hr/>
+									<div class="modal-body">
+										<div class="login-form">
+											<form ng-submit="hire()">
+												{% csrf_token %}
+												<div class="form-group row">
+													<div class="col-lg-6 col-md-6 col-sm-6">
+														<div class="input-with-shadow">
+															<select class="form-control" id="category">
+																{% for category in categories %}
+																 <option value="{{ category.id }}">{{ category.name }}</option>
+																{% endfor %}
+															</select>
+														</div>
+													</div>
+													<div class="col-lg-6 col-md-6 col-sm-6">
+														<select class="form-control" id="budget">
+															{% for budget in budgets %}
+															<option value="{{ budget.id }}">MZN {{ budget.min_value }} - MZN {{ budget.max_value }}</option>
+															{% endfor %}
+														</select>
+													</div>
+													<input type="hidden" disabled id="freelancer"/>
+												</div>
+
+												<div class="form-group">
+													<label>Nome do Projecto *</label>
+													<input class="form-control" type="text" id="title" placeholder="Ex: Desenho de uma Página Web">
+												</div>
+
+												<div class="form-group">
+													<label>Descreva o projeto com as suas palavras *</label>
+													<textarea style="height: 100px;resize: none" class="form-control" id="description" minlength="50" rows="2" placeholder="Ex: Preciso desenvolver um logotipo em menos de uma semana para incluir em minhas peças que vão para as redes sociais."></textarea>
+												</div>
+
+												<div class="col-lg-12 col-md-12 col-sm-12">
+													<div class="form-group">
+														<div class="side-imbo">
+															<ul class="no-ul-list" style="margin-left: -10px">
+																<li>
+																	<input id="exclusive" class="checkbox-custom" type="checkbox">
+																	<label for="exclusive" class="checkbox-custom-label"> disponível para outros Freelancers</label>
+																</li>
+															</ul>
+														</div>
+													</div>
+												</div>
+
+												<div class="form-group">
+													<button title="{% if not user.is_staff %}Por favor verifique a sua Identidade.{% endif %}" type="submit" class="btn btn-primary btn-md pop-login pull-right">Contratar</button>
+												</div>
+											</form>
+										</div>
+									</div>
+								</div>
+							</div>
+				</div>
+				<!-- End Modal -->
+			</div>
+			<!-- Add Hb. Literary -->
+			<div class="modal fade" id="form_literary" tabindex="-1" role="dialog" aria-labelledby="hire" aria-hidden="true">
+						<div class="modal-dialog modal-dialog-centered login-pop-form" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									  <span aria-hidden="true">&times;</span>
+									</button>
+								</div>
+								<div class="modal-body">
+									<div class="login-form">
+										<form id="literary" class="row">
+											{% csrf_token %}
+											<div class="col-lg-12 col-md-12 col-sm-12">
+													<div class="form-group">
+														<label>Qualificação</label>
+														<input type="text" class="form-control" id="qualif" placeholder="Ex: Cisco Certified Network Associate Security (CCNA)" required minlength="3" maxlength="200">
+														<input type="hidden" id="id"/>
+													</div>
+												</div>
+
+												<div class="col-lg-12 col-md-12 col-sm-12">
+													<div class="form-group">
+														<label>Data de emissão</label>
+														<div class="row">
+															<div class="col-lg-6 col-md-6 col-sm-12">
+																<select class="form-control" id="month" required>
+																	<option selected disabled>Mês</option>
+																	<option value="1">Janeiro</option>
+																	<option value="2">Fevereiro</option>
+																	<option value="3">Março</option>
+																	<option value="4">Abril</option>
+																	<option value="5">Maio</option>
+																	<option value="6">Junho</option>
+																	<option value="7">Julho</option>
+																	<option value="8">Agosto</option>
+																	<option value="9">Setembro</option>
+																	<option value="10">Outubro</option>
+																	<option value="11">Novembro</option>
+																	<option value="12">Dezembro</option>
+																</select>
+															</div>
+															<div class="col-lg-6 col-md-6 col-sm-12">
+																<select class="form-control" id="year" required>
+																	<option selected disabled>Ano</option>
+																	<option value="2020">2020</option>
+																	<option value="2019">2019</option>
+																	<option value="2018">2018</option>
+																	<option value="2017">2017</option>
+																</select>
+															</div>
+														</div>
+													</div>
+												</div>
+
+												<div class="col-lg-12 col-md-12 col-sm-12">
+													<div class="form-group">
+														<label>Organização emissora</label>
+														<input type="text" placeholder="Ex: Udemy" class="form-control" id="institute" required minlength="3" maxlength="200">
+													</div>
+												</div>
+											<div class="col-lg-12 col-md-12 col-sm-12">
+												<div class="form-group">
+													<button type="button" id="btn-save-literary" class="btn btn-primary btn-md pull-right pop-login">Guardar</button>
+												</div>
+											</div>
+										</form>
+									</div>
+								</div>
+							</div>
+						</div>
+				</div>
+			<!-- Add Payment_Method -->
+			<div class="modal fade" id="form_payments" tabindex="-1" role="dialog" aria-labelledby="hire" aria-hidden="true">
+						<div class="modal-dialog modal-dialog-centered login-pop-form" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									  <span aria-hidden="true">&times;</span>
+									</button>
+								</div>
+								<h2>Adicionar Forma de Recebimento</span></h2>
+								<hr/>
+								<div class="modal-body">
+									<div class="login-form">
+										<form id="form_payment" class="row">
+											{% csrf_token %}
+												<div class="col-lg-12 col-md-12 col-sm-12">
+													<div class="form-group">
+														<label>Canal</label>
+														<div class="row">
+															<div class="col-lg-12 col-md-12 col-sm-12">
+																<select class="form-control" id="method" required>
+																	{% for payment_method in payment_methods %}
+																	<option value="{{ payment_method.id }}">
+																		{{ payment_method.name }}
+																	</option>
+																	{% endfor %}
+																</select>
+															</div>
+														</div>
+													</div>
+												</div>
+
+												<div class="col-lg-12 col-md-12 col-sm-12">
+													<div class="form-group">
+														<label>Referência da Conta</label>
+														<input type="text" placeholder="" class="form-control" id="reference" required minlength="3" maxlength="200">
+													</div>
+												</div>
+											<div class="col-lg-12 col-md-12 col-sm-12">
+												<div class="form-group">
+													<button type="button" id="btn-save-payment" class="btn btn-primary btn-md pull-right pop-login">Guardar</button>
+												</div>
+											</div>
+										</form>
+									</div>
+								</div>
+							</div>
+						</div>
+				</div>

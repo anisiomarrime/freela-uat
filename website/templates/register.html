@@ -1,0 +1,132 @@
+{% extends "_layouts/base.html" %}
+
+{% block title %}
+    Freela - Novo Membro
+{% endblock %}
+
+{% block content %}
+    <!-- ============================ Who We Are Start ================================== -->
+    <section style="min-height: 89vh">
+		<div class="container">
+			<div class="row justify-content-center">
+				{% if not apply %}
+				<div class="col-lg-8 col-md-8 col-sm-12" style="margin-top: 6%">
+					<div class="modal-body card" style="padding: 20px">
+						<a href="/" class="navbar-brand" style="text-align: center; min-width: 100%">
+							<img src="/static/website/img/logo.png" class="sticky-logo" alt="Freela">
+						</a>
+						<h6 class="modal-header-title" style="font-weight: 300; font-size: 20px">Você quer contratar ou <span>trabalhar como freelancer?</span></h6>
+						<div class="social-login center-tr" style="margin-top: 20px">
+							<ul>
+								<li><a href="?apply=h" class="btn connect-fb">Quero Contratar</a></li>
+								<li><a href="?apply=w" class="btn connect-linked">Quero Trabalhar</a></li>
+							</ul>
+						</div>
+						<div class="mf-link text-center">Já tem uma conta ?<a href="/login"> Entrar</a></div>
+					</div>
+				</div>
+				{% endif %}
+				<p class="hide message">{{ response.message }}</p>
+				<b class="hide severity">{{ response.severity }}</b>
+				{% if apply == 'w' %}
+					<div class="col-lg-6 col-md-6 col-sm-12">
+							<div class="modal-body card" style="padding: 20px">
+								<a href="/" class="navbar-brand" style="text-align: center; min-width: 100%">
+									<img src="/static/website/img/logo.png" class="sticky-logo" alt="Freela">
+								</a>
+								<div class="login-form">
+									<h4 class="modal-header-title" style="font-weight: 300">Seja <span>Freela</span> em 1 minuto</h4>
+									<form method="post">
+										{% csrf_token %}
+										<div class="form-group">
+											<label>Nome Completo</label>
+											<input type="text" class="form-control" placeholder="Nome Apelido" name="name" required minlength="10" maxlength="150" value="{{ form.name }}">
+										</div>
+
+										<div class="form-group">
+											<label>E-mail</label>
+											<input type="email" class="form-control" placeholder="meunome@exemplo.com" name="email" required minlength="10" maxlength="150" value="{{ form.email }}">
+										</div>
+
+										<div class="form-group">
+											<label>Senha</label>
+											<input type="password" class="form-control" placeholder="*******" name="password" required minlength="6" maxlength="150" value="{{ form.password }}">
+										</div>
+
+										<div class="form-group">
+											<button type="submit" class="btn btn-primary btn-md full-width pop-login">Registar</button>
+										</div>
+										<div class="mf-link text-center">Já tem uma conta ?<a href="/login"> Entrar</a></div>
+									</form>
+								</div>
+							</div>
+						</div>
+				{% endif %}
+
+				{% if apply == 'h' %}
+					<div class="col-lg-6 col-md-6 col-sm-12">
+							<div class="modal-body card" style="padding: 20px">
+								<a href="/" class="navbar-brand" style="text-align: center; min-width: 100%">
+									<img src="/static/website/img/logo.png" class="sticky-logo" alt="Freela">
+								</a>
+								<div class="login-form">
+									<h4 class="modal-header-title" style="font-weight: 300">Começe hoje mesmo a <span>Contratar</span></h4>
+									<form method="post">
+										{% csrf_token %}
+										<div class="form-group">
+											<label>Nome Completo</label>
+											<input type="text" class="form-control" placeholder="Nome Apelido" name="name" required minlength="10" maxlength="150" value="{{ form.name }}">
+										</div>
+
+										<div class="form-group">
+											<label>E-mail</label>
+											<input type="email" class="form-control" placeholder="seunome@exemplo.com" name="email" required minlength="10" maxlength="150" value="{{ form.email }}">
+										</div>
+
+										<div class="form-group">
+											<label>Senha</label>
+											<input type="password" class="form-control" placeholder="*******" name="password" required minlength="6" maxlength="150" value="{{ form.password }}">
+										</div>
+
+										<div class="form-group">
+											<button type="submit" class="btn btn-primary btn-md full-width pop-login">Começar</button>
+										</div>
+										<div class="mf-link text-center">Já tem uma conta ?<a href="/login"> Entrar</a></div>
+									</form>
+								</div>
+							</div>
+						</div>
+				{% endif %}
+
+				{% if apply == 'c' %}
+					<div class="col-lg-6 col-md-6 col-sm-12">
+							<div class="modal-body card" style="padding: 20px">
+								<a href="/" class="navbar-brand" style="text-align: center; min-width: 100%">
+									<img src="/static/website/img/logo.png" class="sticky-logo" alt="Freela">
+								</a>
+								<div class="login-form">
+									<h4 class="modal-header-title" style="font-weight: 300">Tudo pronto para <span>começar</span></h4>
+									<form method="post">
+										<p class="text-muted text-center">
+											Enviamos um e-mail para o endereço <b>{{ form.email }}</b>, por favor, clique no link para confirmar a sua conta.
+										</p><hr/>
+										<div class="mf-link text-center"><a href="/">Página Inicial</a></div>
+									</form>
+								</div>
+							</div>
+						</div>
+				{% endif %}
+			</div>
+		</div>
+	</section>
+	<div class="clearfix"></div>
+	<!-- ============================ Who We Are End ================================== -->
+{% endblock %}
+{% block js %}
+	<script>
+		$('footer').hide();
+		$('body').addClass('bg-light');
+		if($('.message').text())
+			toastMessage($('.message').text(), '#Freela', $('.severity').text());
+    </script>
+{% endblock %}

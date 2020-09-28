@@ -1,0 +1,87 @@
+<form class="login100-form validate-form flex-sb flex-w">
+    <div class="row">
+        <div class="col-md-12 edit-profile-picture login100-form validate-form flex-sb flex-w">
+            <img src="http://localhost:8000/static/website/img/me.jpg" class="profile img-square m-b-36 mx-auto d-block" style="border: 1px solid #000"/>
+            <input type="file" name="foto_perfil" title="Clique para carregar" accept=".jpg,.png, .jpeg" onChange="validateImage(this);"/>
+        </div>
+        <br/>
+        <div class="col-md-12 login100-form validate-form flex-sb flex-w">
+            <span class="txt1 p-b-11">Nome Completo</span>
+            <div class="wrap-input100 validate-input m-b-16 input-nome" data-validate="Username é obrigatório">
+                <input class="input100" type="text" name="nome">
+                <span class="focus-input100"></span>
+            </div>
+            <span class="txt1 p-b-11">E-mail</span>
+            <div class="wrap-input100 validate-input m-b-36 input-nome" data-validate="Username é obrigatório">
+                <input class="input100" type="text" name="nome">
+                <span class="focus-input100"></span>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="row">
+        <div class="col-md-6 login100-form validate-form flex-sb flex-w">
+            <span class="txt1 p-b-11">Username <i style="opacity: .5">(apenas letras, ponto e underscores)</i></span>
+            <div class="wrap-input100 validate-input m-b-36 input-nome" data-validate="Username é obrigatório">
+                <input class="input100" type="text" name="nome" placeholder="@exemplo">
+                <span class="focus-input100"></span>
+            </div>
+        </div>
+        <div class="col-md-6 login100-form validate-form flex-sb flex-w">
+            <span class="txt1 p-b-11">Site/Portfólio</span>
+            <div class="wrap-input100 validate-input m-b-36 input-nome" data-validate="Username é obrigatório">
+                <input type="url" class="input100" name="site" placeholder="http://www.exemplo.com"/>
+                <span class="focus-input100"></span>
+            </div>
+        </div>
+        <div class="col-md-6 login100-form validate-form flex-sb flex-w">
+            <span class="txt1 p-b-11">Instagram <i style="opacity: .5">(apenas letras, ponto e underscores)</i></span>
+            <div class="wrap-input100 validate-input m-b-36 input-nome" data-validate="Username é obrigatório">
+                <input class="input100" type="text" name="nome" placeholder="@exemplo">
+                <span class="focus-input100"></span>
+            </div>
+        </div>
+        <div class="col-md-6 login100-form validate-form flex-sb flex-w">
+            <span class="txt1 p-b-11">Facebook</span>
+            <div class="wrap-input100 validate-input m-b-36 input-nome" data-validate="Username é obrigatório">
+                <input type="url" class="input100" name="site" placeholder="http://www.exemplo.com"/>
+                <span class="focus-input100"></span>
+            </div>
+        </div>
+        <div class="col-md-8 login100-form validate-form flex-sb flex-w">
+            <span class="txt1 p-b-11">Endereço</span>
+            <div class="wrap-input100 validate-input m-b-36 input-nome" data-validate="Username é obrigatório">
+                <input class="input100" type="text" name="nome">
+                <span class="focus-input100"></span>
+            </div>
+        </div>
+        <div class="col-md-4 login100-form validate-form flex-sb flex-w">
+            <span class="txt1 p-b-11">Celular</span>
+            <div class="wrap-input100 validate-input m-b-36 input-nome" data-validate="Username é obrigatório">
+                <input class="input100" type="text" name="nome">
+                <span class="focus-input100"></span>
+            </div>
+        </div>
+        <div class="col-md-6 login100-form validate-form flex-sb flex-w">
+            <span class="txt1 p-b-11">Bio</span>
+            <div class="wrap-input100 validate-input m-b-36">
+                <textarea class="input100" type="text" name="bio" rows="5"></textarea>
+                <span class="focus-input100"></span>
+            </div>
+        </div>
+        <div class="col-md-6 login100-form validate-form flex-sb flex-w">
+            <span class="txt1 p-b-11">Interesses (maximum 5)</span>
+            <div class="wrap-input100 validate-input m-b-36">
+                <input class="input100" type="text" name="interesse" placeholder="Ex: Viajar, Leitura">
+                <span class="focus-input100"></span>
+            </div>
+            <i style="opacity: .4;margin-top: -10px">Seus interesses são gerados a partir dos tipos de fotos que você gosta, coleciona e contribui.</i>
+        </div>
+    </div>
+
+    <div class="container-login100-form-btn">
+        <button class="login100-form-btn" type="submit">
+            Salvar
+        </button>
+    </div>
+</form>

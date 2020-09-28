@@ -1,0 +1,85 @@
+{% extends "_layouts/base.html" %}
+
+{% block title %}
+    Anisio Marrime's Album | Mozambique Pexels
+{% endblock %}
+
+{% block content %}
+
+{% include "_layouts/main_nav.html" %}
+
+<section class="container" id="profile">
+    <div class="row">
+        <div class="col-md-3">
+            <img src="https://images.pexels.com/photos/774095/pexels-photo-774095.jpeg?auto=compress&cs=tinysrgb&h=350" class="profile-img"/>
+        </div>
+        <div class="col-md-9">
+            <h4 class="profile-username">
+                @jane.marrime
+                {% if True %}
+                <a href="http://localhost:8000/account">
+                    <i class="ion-gear-a"></i>
+                </a>
+                {% endif %}
+            </h4>
+            <p>Membro desde: <b>12 Setembro 2019</b></p>
+            <p>I'm Jane Marrime, Programmer, Appreciates man's who take care of their body and mind 📷✈️🏕️.</p><br/>
+            <div class="profile-stats">
+                <ul>
+                    <li><i class="ion-ios-heart"></i> <span class="profile-stat-count">164</span> gostos</li>
+                    <li><i class="fa fa-eye fs-22"></i> <span class="profile-stat-count">188</span> visualizações</li>
+                    <li><i class="ion-ios-cloud-download"></i> <span class="profile-stat-count">206</span> download's</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="toolbar-album">
+    <h4 style="line-height: 35px;padding: 0px 5px">
+        <a href="#" style="text-decoration: none"><b style="font-size: 12px;color: #444;">Fotos Carregadas (2)</b></a>
+        <a href="#"><b style="font-size: 12px;margin-left: 20px">Pupulares</b></a>
+        <a href="#"><b style="font-size: 12px;margin-left: 20px">Favoritos</b></a>
+        {% if True %}
+            <a class="btn btn-upload" style="border-radius: 0" data-toggle="modal" data-target="#uploadPhoto">Carregar Foto</a>
+        {% endif %}
+    </h4>
+</div>
+
+<!-- Photo Grid -->
+<section class="container" style="min-width: 93%;margin-top: -40px">
+    {% include "_layouts/grid_images.html" %}
+</section>
+
+{% include "_layouts/form_upload.html" %}
+
+{% endblock %}
+
+{% block js %}
+    <script>
+        new GridScrollFx( document.getElementById( 'grid' ), {
+            viewportFactor : 0.4
+        } );
+
+        //DOM
+        var dm = document.querySelector.bind(document);
+
+        //APP
+        var App = {};
+        App.init = function () {
+            // trigger input
+            dm("#triggerFile").addEventListener("click", function (evt) {
+                evt.preventDefault();
+                $("input[type=file]").click();
+            });
+
+            //upload more
+            dm(".importar").addEventListener("click", function () {
+                showHashTagForm();
+            });
+
+            // input change
+            dm("input[type=file]").addEventListener("change", handleFileSelect);
+        }();
+    </script>
+{% endblock %}

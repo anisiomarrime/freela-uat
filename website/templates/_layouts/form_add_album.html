@@ -1,0 +1,44 @@
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true" style="z-index: 100;background: none;display: none;">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title text-center" style="font-weight: 200;text-align: center;width: 100%" id="exampleModalLabel">
+                    <i class="ion-ios-albums-outline"></i> Novo Album
+                </h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="margin-top: -9px">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form class="login100-form validate-form flex-sb flex-w" method="POST">
+                    {% csrf_token %}
+                    <span class="txt1 p-b-11">CATEGORIA</span>
+                    <div class="wrap-input100 validate-input m-b-16" data-validate="Categoria é obrigatória">
+                        <select class="input100" data-trigger="" id="category" name="category" style="border: none" required>
+                            <option selected disabled></option>
+                            {% for categoria in categorias %}
+                            <option value="{{ categoria.id }}">{{ categoria.name }}</option>
+                            {% endfor %}
+                        </select>
+                        <span class="focus-input100"></span>
+                    </div>
+                    <span class="txt1 p-b-11">Título</span>
+                    <div class="wrap-input100 validate-input m-b-16" data-validate="Titulo é obrigatório">
+                        <input class="input100" type="text" id="title" name="title" required>
+                        <span class="focus-input100"></span>
+                    </div>
+                    <div class="contact100-form-checkbox m-b-16">
+                        <input class="input-checkbox100 disabled" id="ckb1" type="checkbox" name="visivel" checked disabled>
+                        <label class="label-checkbox100 disabled" for="ckb1" title="Apenas usuários premium">
+                            Album vísivel (público)
+                        </label>
+                    </div>
+                    <button class="login100-form-btn" type="submit">
+                        Salvar
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,27 @@
+{% extends "_layouts/base.html" %}
+
+{% block title %}
+    Freela - Checkout Completed
+{% endblock %}
+
+{% block content %}
+{% include "_layouts/navbar.html" %}
+    <!-- ============================ Who We Are Start ================================== -->
+    <section style="min-height: 75vh">
+		<div class="container">
+			<i class="ti-close text-center" style="display: block;margin: auto;font-size: 60px"></i>
+			<h2 style="font-size: 32px; opacity: .9">Lamentamos, o seu pacote não permite executar mais de {{ employer.package.max_project }} projecto(s) em simultâneo! <b class="text-blue">{{ employer.package.name }}.</b></h2><br/>
+			<h4 class="text-center"><a href="/plans">Actualizar Agora...</a></h4>
+		</div>
+	</section>
+	<div class="clearfix"></div>
+	<!-- ============================ Who We Are End ================================== -->
+
+{% endblock %}
+{% block js %}
+<script>
+        $('.topbar').addClass('tp-rlt');
+        $('.default-logo').attr('src', '/static/website/img/logo.png');
+        $('.exchange-logo').addClass('light');
+</script>
+{% endblock %}

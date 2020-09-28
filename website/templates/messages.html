@@ -1,0 +1,137 @@
+{% extends "_layouts/base.html" %}
+{% block title %}
+Freela - Freelancer Dashboard
+{% endblock %}
+{% block content %}
+{% include "_layouts/navbar.html" %}
+<!-- ============== Candidate Dashboard ====================== -->
+<section class="tr-single-detail gray-bg" style="background: rgba(200, 200, 200, .1);margin-top: -80px;padding-bottom: 0">
+    <div class="container full">
+        <div class="row">
+            <!-- Sidebar Start -->
+            <div class="col-md-12 col-sm-12">
+                <div id="frame">
+                    <div id="sidepanel">
+                            <div id="profile">
+                                <div class="wrap">
+                                    <img id="profile-img" src="https://freelamz.herokuapp.com/load_foto/{{ my_account.photo }}" class="online" alt="" />
+                                    <p>{{ my_account.user.first_name }} {{ my_account.user.last_name }}</p>
+                                </div>
+                            </div>
+                            <div id="search">
+                                <label for="search-input"><i class="fa fa-search" aria-hidden="true"></i></label>
+                                <input type="text" id="search-input" placeholder="Pesquisar contacto..." />
+                            </div>
+                            <div id="contacts">
+                                <ul>
+                                    {% for chat in chats %}
+                                    <li class="contact" data-ref="{{ chat.token }}" data-user="{{ chat.second_user.id }}">
+                                        <div class="wrap">
+                                            <span class="contact-status online" style="margin-top: 10px"></span>
+                                            <img class="thumb" style="margin-top: 10px" src="https://freelamz.herokuapp.com/load_foto/{{ chat.second_user.photo }}" alt="" />
+                                            <div class="meta">
+                                                <p class="name" style="margin-top: 8px">{{ chat.second_user.first_name }} {{ chat.second_user.last_name }}</p>
+                                                <p class="preview" style="font-size: 10px; margin-top: -10px">{{ chat.second_user.last_login }}</p>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+
+                    <div class="content">
+                            <div class="contact-profile">
+                                <img id="chat-photo" alt=""/>
+                                <p id="chat-name"></p>
+                            </div>
+                            <div class="messages">
+                                <ul>
+
+                                </ul>
+                            </div>
+                            <div class="message-input">
+                                <div class="wrap">
+                                <input type="text" placeholder="Digite a mensagem..." />
+                                <input type="hidden" value="{{ my_account.user.id }}" id="sender" />
+                                <!--i class="fa fa-paperclip attachment" aria-hidden="true"></i-->
+                                <button class="submit"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ============== Candidate Dashboard ====================== -->
+{% endblock %}
+{% block js %}
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-database.js"></script>
+<script src="/static/website/js/chat.js"></script>
+<script>
+   $('.topbar').addClass('tp-rlt');
+   $('.default-logo').attr('src', 'https://freelamz.herokuapp.com/static/website/img/logo.png');
+   $('.exchange-logo').addClass('light');
+   $('footer').hide();
+
+   $(".messages").animate({ scrollTop: $(document).height() }, "fast");
+
+    $("#profile-img").click(function() {
+        $("#status-options").toggleClass("active");
+    });
+
+    $("#status-options ul li").click(function() {
+        $("#profile-img").removeClass();
+        $("#status-online").removeClass("active");
+        $("#status-away").removeClass("active");
+        $("#status-busy").removeClass("active");
+        $("#status-offline").removeClass("active");
+        $(this).addClass("active");
+
+        if($("#status-online").hasClass("active")) {
+            $("#profile-img").addClass("online");
+        } else if ($("#status-away").hasClass("active")) {
+            $("#profile-img").addClass("away");
+        } else if ($("#status-busy").hasClass("active")) {
+            $("#profile-img").addClass("busy");
+        } else if ($("#status-offline").hasClass("active")) {
+            $("#profile-img").addClass("offline");
+        } else {
+            $("#profile-img").removeClass();
+        };
+
+        $("#status-options").removeClass("active");
+    });
+
+    function newMessage() {
+        message = $(".message-input input").val();
+        sender = sessionStorage.getItem('sender');
+        chanel = sessionStorage.getItem('chanel');
+
+        if($.trim(message) == '') {
+            return false;
+        }
+
+        sendMessage(chanel, message, sender);
+
+        $('.message-input input').val(null);
+        $('.contact.active .preview').html('<span>You: </span>' + message);
+        $(".messages").animate({ scrollTop: $(document).height() }, "fast");
+    };
+
+    $('.submit').click(function() {
+      newMessage();
+    });
+
+    $(window).on('keydown', function(e) {
+      if (e.which == 13) {
+        newMessage();
+        return false;
+      }
+    });
+</script>
+<!--Loading Chats-->
+{% endblock %}

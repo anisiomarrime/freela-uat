@@ -1,0 +1,93 @@
+{% extends "_layouts/base.html" %}
+{% block title %}
+    Freela - Verificação de Identidade
+{% endblock %}
+
+{% block content %}
+{% include "_layouts/navbar.html" %}
+    <!-- ============================ Hero Banner  Start================================== -->
+	<div class="container-fluid breadcrumbs" style="margin-top: -0%">
+				<div class="container">
+					<div class="row">
+						<div class="col-xs-12">
+							<a href="/">
+							Freela
+							</a>
+							<a href="#">
+								<span>
+									<i class="ti-arrow-right"></i>
+								</span>
+								Verificação de Identidade
+							</a>
+						</div>
+					</div>
+				</div>
+	</div>
+	<div class="clearfix"></div>
+    <!-- ============================ Who We Are Start ================================== -->
+    <section style="min-height: 65vh">
+        <div class="container">
+
+            <div class="row">
+                <div class="col-md-8">
+                    <p>Hello {{ user.first_name }},</p>
+                    <p class="text-justify">
+						Para verificar a sua identidade no Freela, preencha devidamente os dados no seu <a href="/freelancer-dashboard">perfil</a>, coloque uma foto de perfil
+						e partilhe a sua Identificação emitida pelo governo.
+                    </p><br/>
+                    <p class="text-justify">
+                        Os documentos aceitáveis ​​incluem Passaporte, Bilhete de Identidade (BI), Carta de Condução, Identificação de Eleitor.
+A sua Identificação do governo deverá ser da mesma pessoa que sua foto de perfil do Freela,
+corresponder ao seu endereço de perfil do Freela.
+					</p><br/>
+
+					<p>
+					<b>Dicas para tirar uma foto do seu ID</b>
+					<ul>
+						<li>1 - Tire uma foto da frente do seu ID, sem flash</li>
+						<li>2 - Capture a imagem de cima, com seu ID em uma superfície plana</li>
+						<li>3 - Verifique se todos os quatro cantos do seu ID estão sendo exibidos</li>
+						<li>4 - Tire a foto no formato PNG, JPEG</li>
+					</ul>
+                    </p><br/>
+					<b>Como enviar a Identificação</b>
+					<ul style="margin-top: 5px">
+						<li>1 - Envie o seu ID para: <b><a href="mailto:olygran@gmail.com" target="_blank">olygran@gmail.com</a></b></li>
+					</ul>
+                    </p><br/>
+					<b class="text-danger">NB: A verificação será feita dentro de 24h, use o mesmo e-mail associado ao perfil do Freela.</b>
+                </div>
+                <div class="col-md-4 col-sm-12" style="margin-top: 25px; padding: 40px;padding-top:0">
+				<!-- Candidate Detail -->
+				<div class="tr-single-box card-square-freelancer">
+					<div class="tr-single-body">
+						<section class="user-stats">
+							<article>
+								<img width="140px" style="margin: auto;display: block;" class="img-fluid rounded-circle" src="/static/website/img/olygran.png" alt="Profile">
+								<br/>
+								<h6 class="text-center {% if freelancer.user.is_staff %}verified{% endif %}"><b>{{ proposal.freelancer.user.first_name }} {{ proposal.freelancer.user.last_name }}</b></h6>
+								<!---->
+							</article>
+                            <h6 class="text-center verified"><b>Olygran</b></h6>
+							<a href="mailto:olygran@gmail.com" target="_blank" style="font-size: 14px;display:block" class="text-center">
+								olygran@gmail.com
+							</a>
+							</article> <!---->
+						</section>
+					</div>
+				</div>
+				</div>
+            </div>
+
+        </div>
+    </section>
+	<div class="clearfix"></div>
+	<!-- ============================ Who We Are End ================================== -->
+{% endblock %}
+{% block js %}
+<script>
+        $('.topbar').addClass('tp-rlt');
+        $('.default-logo').attr('src', '/static/website/img/logo.png');
+        $('.exchange-logo').addClass('light');
+</script>
+{% endblock %}

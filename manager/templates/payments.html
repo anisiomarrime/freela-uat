@@ -1,0 +1,62 @@
+{% extends "_layouts/base_manager.html" %}
+{% block content %}
+       <!-- Begin Page Content -->
+        <div class="container-fluid">
+
+          <!-- Page Heading -->
+          <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800">Pagamentos</h1>
+            <!--a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Gerar Relatório</a-->
+          </div>
+
+          <!-- DataTales Example -->
+          <div class="card shadow mb-4">
+            <div class="card-header py-3">
+              <h6 class="m-0 font-weight-bold text-primary">({{ payments.count }}) Pagamentos</h6>
+            </div>
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                  <thead>
+                    <tr>
+                      <th>Nome</th>
+                      <th>Pacote</th>
+                      <th class="text-center">Metodo</th>
+                      <th class="text-center">Conta</th>
+                      <th class="text-center">Valor Pago</th>
+                      <th class="text-center">Completado</th>
+                      <th class="text-center">Registado Em</th>
+                      <th class="text-right text-danger">Expira em</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for pay in payments %}
+                    <tr>
+                      <td>{{ pay.user.first_name }} {{ pay.user.last_name }}</td>
+                      <td>{{ pay.package.name }}</td>
+                      <td class="text-center">{{ pay.payment_method.name }}</td>
+                      <td class="text-center">{{ pay.mobile }}</td>
+                      <td class="text-center">{{ pay.amount }}</td>
+                      <td class="text-center">
+                        {% if pay.is_completed %}
+                        <i class="fa fa-check text-success"></i>
+                        {% else %}
+                        <i class="fa fa-times text-danger"></i>
+                        {% endif %}
+                      </td>
+                      <td class="text-center">{{ pay.created_at }}</td>
+                      <td class="text-right text-danger">{{ pay.expire_at }}</td>
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <!-- /.container-fluid -->
+{% endblock %}
+{% block js %}
+
+{% endblock %}

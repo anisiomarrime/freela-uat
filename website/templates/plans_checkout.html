@@ -1,0 +1,101 @@
+{% extends "_layouts/base.html" %}
+
+{% block title %}
+    Freela - Checkout
+{% endblock %}
+
+{% block content %}
+{% include "_layouts/navbar.html" %}
+    <!-- ============================ Who We Are Start ================================== -->
+    <section style="min-height: 89vh">
+		<div class="container">
+			<h3 style="font-size: 30px; opacity: .9">Você está prestes a adquirir uma assinatura Professional.</h3>
+			<h4 class="text-muted">Como você quer pagar?</h4>
+			<div class="row justify-content-center">
+				<div class="col-lg-8 col-md-8 col-sm-12" style="margin-top: 6%">
+					<div class="accordion" id="accordionExample" style="margin-top: -50px;">
+					  <div class="card">
+						<div class="card-header" id="headingThree">
+						  <h2 class="mb-0">
+							<a class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+							  Pagamento M-PESA
+							</a>
+						  </h2>
+						</div>
+						<div id="collapseThree" class="collapse show" aria-labelledby="headingThree" data-parent="#accordionExample">
+						  <div class="card-body">
+							  <div class='pay_container'>
+								  <div class='window'>
+									  <div class='credit-info'>
+										  <form class='credit-info-content' onsubmit="sendPayment();return false" novalidate>
+											  <div class="row">
+												  	<div class="col-md-12">
+														<img src="/static/website/img/mpesa.png" style="display: block; margin: auto" width="160px"/>
+														<br/>
+														<input type="text" class='input-field form-control' style="display: block; margin: auto" placeholder="Digite o Número M-Pesa, ex: 841234567" id="phone" />
+														<input type="hidden" id="package" value="{{ plan.id }}"/>
+													</div>
+											  </div>
+											  <br/>
+											  <div class="row">
+												  	<div class="col-md-12">
+											  			<button class='btn pay-btn' style="display: block; margin: auto;margin-top: 20px" type="submit"><i class="lni-lock"></i> Efectuar Pagamento</button>
+													</div>
+											  </div>
+										  </form>
+									  </div>
+								  </div>
+							  </div>
+						  </div>
+						</div>
+					  </div>
+
+						<div class="card">
+						<div class="card-header" id="headingOne">
+						  <h2 class="mb-0">
+							<a class="btn btn-link disabled" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+							  PayPal ou Cartão de Credito
+							</a>
+						  </h2>
+						</div>
+
+						<div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+						  <div class="card-body">
+						  	<a href="https://www.sandbox.paypal.com/checkoutnow?sessionID=b9cdc6e57e_mtq6mzy6mtk&buttonSessionID=f9dba55a65_mtq6mzc6mti&fundingSource=paypal&buyerCountry=MZ&locale.x=en_US&commit=true&clientID=AZDxjDScFpQtjWTOUtWKbyN_bDt4OgqaF4eYXlewfBP4-8aqX3PiV8e1GWU6liB2CUXlkA59kJXE7M6R&env=sandbox&sdkMeta=eyJ1cmwiOiJodHRwczovL3d3dy5wYXlwYWwuY29tL3Nkay9qcz9jbGllbnQtaWQ9c2IiLCJzdGFnZUhvc3QiOm51bGwsImFwaVN0YWdlSG9zdCI6bnVsbH0&xcomponent=1&version=5.0.94&token=02N954153N7333016" class="btn connect-fb"><i class="lni-lock"></i> Continuar com PayPal</a>
+						  </div>
+						</div>
+					  </div>
+					</div>
+				</div>
+
+				<div class="col-md-4 col-sm-12" style="margin-top: 25px">
+				<!-- Candidate Detail -->
+				<div class="tr-single-box card-square-freelancer">
+					<div class="tr-single-body">
+						<section class="user-stats">
+							<article>
+								<p><b>Você está prestes a adquirir uma assinatura: <span class="text-blue">{{ plan.name }}</span> </b></p>
+								<!---->
+							</article>
+							<hr/>
+							<article>
+								<p><span>Valor total a pagar</span><span><strong class="pull-right text-blue">MZN{{ plan.price }}</strong></span></p> <!---->
+							</article> <!---->
+						</section>
+					</div>
+				</div>
+			</div>
+			</div>
+		</div>
+	</section>
+	<div class="clearfix"></div>
+	<!-- ============================ Who We Are End ================================== -->
+
+{% endblock %}
+{% block js %}
+<script>
+        $('.topbar').addClass('tp-rlt');
+        $('.default-logo').attr('src', '/static/website/img/logo.png');
+        $('.exchange-logo').addClass('light');
+</script>
+{% endblock %}

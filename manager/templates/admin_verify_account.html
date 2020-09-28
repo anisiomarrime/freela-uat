@@ -1,0 +1,86 @@
+{% extends "_layouts/base_manager.html" %}
+{% block content %}
+       <!-- Begin Page Content -->
+        <div class="container-fluid">
+
+          <!-- Page Heading -->
+          <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800">Freelas</h1>
+            <!--a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Gerar Relatório</a-->
+          </div>
+
+          <!-- DataTales Example -->
+          <div class="card shadow mb-4">
+            <div class="card-header py-3">
+              <h6 class="m-0 font-weight-bold text-primary">({{ freelancers.count }}) Freelas</h6>
+            </div>
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                  <thead>
+                    <tr>
+                      <th>Nome</th>
+                      <th>Pacote</th>
+                      <th>E-mail</th>
+                      <th class="text-center">Verificado</th>
+                      <th class="text-center">Registado Em</th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for freela in freelancers %}
+                    <tr>
+                      <td>{{ freela.user.first_name }} {{ freela.user.last_name }}</td>
+                      <td>{{ freela.package.name }}</td>
+                      <td>{{ freela.user.email }}</td>
+                      <td class="text-center">
+                        {% if freela.user.is_staff %}
+                        <i class="fa fa-check text-success"></i>
+                        {% else %}
+                        <i class="fa fa-times text-danger"></i>
+                        {% endif %}
+                      </td>
+                      <td class="text-center">{{ freela.user.date_joined }}</td>
+                      <td class="buttons" style="width: 30px">
+                         {% if freela.user.is_staff == 0 %}
+                         <button type="button" class="btn btn-success btn-approve" title="Aprovar" data-id="{{ freela.id }}"><i class="fa fa-check"></i></button>
+                         {% else %}
+                          <a href="/freelancer/{{ freela.slug }}/" class="btn btn-primary" title="Visualizar"><i class="fa fa-eye"></i></a>
+                         {% endif %}
+                      </td>
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <!-- /.container-fluid -->
+{% endblock %}
+{% block js %}
+    <script>
+        jQuery(document).ready(function ($) {
+
+            $('.btn-approve').on('click', function(){
+                approveAnnouncement($(this).data('id'));
+            })
+
+            function approveAnnouncement(id){
+                var host = 'http://localhost:8000/manager'
+                $.ajax({
+                    type: 'get',
+                    url: host + '/api/v1/approve/'+id+'/',
+                    success: function(res){
+                        alert('Freela verificado com sucesso!')
+                        location.reload()
+                    },
+                    error: function(res){
+                        alert('Erro ao verificar Freela, por favor tente novamente!')
+                    }
+                });
+            }
+        });
+    </script>
+{% endblock %}

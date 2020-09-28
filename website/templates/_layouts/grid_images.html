@@ -1,0 +1,18 @@
+<section class="grid-wrap">
+    <ul class="grid swipe-down" id="grid">
+        {% for foto in fotos %}
+        <li>
+            <span class="like">
+                <i class="icon ion-ios-heart-outline"></i>
+            </span>
+            <a href="http://localhost:8000/photo/{{ foto }}">
+                <img src="http://localhost:8000/static/website/img/galery/{{ foto }}" class="img-fluid" alt="dummy">
+            </a>
+            <div class="author">
+                <img src="http://localhost:8000/static/website/img/me.jpg"/>
+                <a>Anisio Marrime</a>
+            </div>
+        </li>
+        {% endfor %}
+    </ul>
+</section>
